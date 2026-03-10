@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorio Dental — Gestión de Cuentas</title>
+  <meta name="description" content="Sistema de gestión de clientes y cuentas corrientes para laboratorio de mecánica dental." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ====== LOGIN SCREEN ====== -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">
+        <svg class="login-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2C8 2 6 5 6 8c0 2 1 3.5 2 4.5L7 22h10l-1-9.5c1-1 2-2.5 2-4.5 0-3-2-6-6-6z"/>
+          <path d="M9 14h6" stroke-linecap="round"/>
+        </svg>
+        <h1 class="login-title">DentalLab</h1>
+        <p class="login-subtitle">Gestión de Cuentas Corrientes</p>
+      </div>
+      <form id="login-form" autocomplete="off">
+        <div class="form-group">
+          <label for="login-user">Usuario</label>
+          <input type="text" id="login-user" placeholder="Ingresá tu usuario" required />
+        </div>
+        <div class="form-group">
+          <label for="login-pass">Contraseña</label>
+          <div class="password-wrapper">
+            <input type="password" id="login-pass" placeholder="Ingresá tu contraseña" required />
+            <button type="button" class="toggle-password" id="toggle-password" aria-label="Mostrar contraseña">
+              <svg id="eye-open" class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+              <svg id="eye-closed" class="eye-icon" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <p id="login-error" class="login-error"></p>
+        <button type="submit" class="btn btn-primary login-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          Iniciar Sesión
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====== SIDEBAR ====== -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2C8 2 6 5 6 8c0 2 1 3.5 2 4.5L7 22h10l-1-9.5c1-1 2-2.5 2-4.5 0-3-2-6-6-6z"/>
+          <path d="M9 14h6" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">DentalLab</span>
+      </div>
+      <button id="sidebar-close" class="sidebar-close" aria-label="Cerrar menú">✕</button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-link active" data-section="dashboard" id="nav-dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-link" data-section="precios" id="nav-precios">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>
+        <span>Lista de Precios</span>
+      </a>
+      <a href="#" class="nav-link" data-section="ficha" id="nav-ficha">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span>Ficha de Carga</span>
+      </a>
+      <a href="#" class="nav-link" data-section="doctores" id="nav-doctores">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Doctores</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p class="sidebar-version">v1.0.0</p>
+    </div>
+  </aside>
+
+  <!-- ====== MOBILE HEADER ====== -->
+  <header class="mobile-header">
+    <button id="sidebar-toggle" class="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="mobile-title">DentalLab</span>
+  </header>
+
+  <!-- ====== OVERLAY ====== -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <!-- ====== MAIN CONTENT ====== -->
+  <main class="main-content">
+
+    <!-- ============ SECTION: DASHBOARD ============ -->
+    <section id="section-dashboard" class="section active">
+      <div class="section-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p class="section-subtitle">Resumen de cuentas corrientes por doctor</p>
+        </div>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="kpi-row" id="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-icon kpi-icon--doctors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-value" id="kpi-doctors">0</span>
+            <span class="kpi-label">Doctores</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon kpi-icon--debe">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-value" id="kpi-debe">$0</span>
+            <span class="kpi-label">Total Debe</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon kpi-icon--haber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-value" id="kpi-haber">$0</span>
+            <span class="kpi-label">Total Haber</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon kpi-icon--saldo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-value" id="kpi-saldo">$0</span>
+            <span class="kpi-label">Saldo Total</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Table -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Resumen por Doctor</h2>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table" id="table-resumen">
+            <thead>
+              <tr>
+                <th>Doctor</th>
+                <th class="text-right">Total Debe</th>
+                <th class="text-right">Total Haber</th>
+                <th class="text-right">Saldo</th>
+                <th class="text-center">Detalle</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-resumen">
+              <tr><td colspan="5" class="empty-state">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION: PRECIOS ============ -->
+    <section id="section-precios" class="section">
+      <div class="section-header">
+        <div>
+          <h1>Lista de Precios</h1>
+          <p class="section-subtitle">Catálogo de trabajos y valores actuales</p>
+        </div>
+        <button class="btn btn-primary" id="btn-add-precio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nuevo Precio
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive">
+          <table class="data-table" id="table-precios">
+            <thead>
+              <tr>
+                <th>Categoría</th>
+                <th>Trabajo</th>
+                <th class="text-right">Precio</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-precios">
+              <tr><td colspan="4" class="empty-state">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION: FICHA DE CARGA ============ -->
+    <section id="section-ficha" class="section">
+      <div class="section-header">
+        <div>
+          <h1>Ficha de Carga</h1>
+          <p class="section-subtitle">Registrar trabajos y pagos de doctores</p>
+        </div>
+      </div>
+
+      <div class="card form-card">
+        <form id="form-movimiento" autocomplete="off">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="mov-fecha">Fecha</label>
+              <input type="date" id="mov-fecha" required />
+            </div>
+            <div class="form-group">
+              <label for="mov-doctor">Doctor</label>
+              <select id="mov-doctor" required>
+                <option value="">Seleccionar doctor…</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="mov-tipo">Tipo de Registro</label>
+              <select id="mov-tipo">
+                <option value="trabajo">Trabajo realizado</option>
+                <option value="pago">Pago del doctor</option>
+              </select>
+            </div>
+            <div class="form-group" id="group-trabajo">
+              <label for="mov-trabajo">Trabajo</label>
+              <select id="mov-trabajo">
+                <option value="">Seleccionar trabajo…</option>
+              </select>
+            </div>
+            <div class="form-group" id="group-concepto-pago" style="display:none">
+              <label for="mov-concepto-pago">Concepto del pago</label>
+              <input type="text" id="mov-concepto-pago" placeholder="Ej: Pago en efectivo" />
+            </div>
+            <div class="form-group">
+              <label for="mov-debe">Debe ($)</label>
+              <input type="number" id="mov-debe" min="0" step="0.01" value="0" />
+            </div>
+            <div class="form-group">
+              <label for="mov-haber">Haber ($)</label>
+              <input type="number" id="mov-haber" min="0" step="0.01" value="0" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="btn-guardar-mov">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Guardar Movimiento
+            </button>
+            <button type="reset" class="btn btn-ghost" id="btn-reset-mov">Limpiar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tabla de movimientos recientes -->
+      <div class="card" style="margin-top:1.5rem">
+        <div class="card-header">
+          <h2>Movimientos Recientes</h2>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table" id="table-movimientos">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Doctor</th>
+                <th>Concepto</th>
+                <th class="text-right">Debe</th>
+                <th class="text-right">Haber</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-movimientos">
+              <tr><td colspan="6" class="empty-state">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION: DOCTORES ============ -->
+    <section id="section-doctores" class="section">
+      <div class="section-header">
+        <div>
+          <h1>Doctores</h1>
+          <p class="section-subtitle">Gestión de clientes del laboratorio</p>
+        </div>
+        <button class="btn btn-primary" id="btn-add-doctor">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nuevo Doctor
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive">
+          <table class="data-table" id="table-doctores">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre Completo</th>
+                <th class="text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-doctores">
+              <tr><td colspan="3" class="empty-state">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====== MODAL ====== -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h3 id="modal-title">Título</h3>
+        <button class="modal-close" id="modal-close" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Dynamic content -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== DETAIL MODAL (movimientos de un doctor) ====== -->
+  <div id="detail-overlay" class="modal-overlay">
+    <div class="modal modal--wide" id="detail-modal">
+      <div class="modal-header">
+        <h3 id="detail-title">Detalle</h3>
+        <button class="modal-close" id="detail-close" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="modal-body" id="detail-body">
+        <!-- Dynamic content -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== TOAST CONTAINER ====== -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ====== SCRIPTS ====== -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
